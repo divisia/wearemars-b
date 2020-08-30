@@ -1,0 +1,13 @@
+/venv/
+/static/
+/.code/
+
+**/__pycache__/
+**/*.pyc
+*.save
+
+/db.sqlite3
+
+/*.png
+/*.jpg
+
