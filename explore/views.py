@@ -1,13 +1,17 @@
 from django.shortcuts import render
 from .models import GenericRecord
 
-try:
-    clicks = GenericRecord.objects.get(typestr='clicks')
-except GenericRecord.DoesNotExist:
-    clicks = GenericRecord.objects.create(typestr='clicks', value='0')
-clicks.value = int(clicks.value)
+loaded = False
+def load():
+    global clicks
+    try:
+        clicks = GenericRecord.objects.get(typestr='clicks')
+    except GenericRecord.DoesNotExist:
+        clicks = GenericRecord.objects.create(typestr='clicks', value='0')
+    clicks.value = int(clicks.value)
 
 def landing(request):
+    if not loaded: load()
     clicks.value += 1 # int(clicks.value) + 1
     clicks.save()
 
